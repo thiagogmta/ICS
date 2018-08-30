@@ -64,7 +64,7 @@ Essa marcação lhe chama atenção para que tenha cuidado, provavelmente para q
 
 === Códigos e comandos
 
-Sempre que for necessário a execução de um comando no terminal esses comando serão apresentados em destaque e precedidos por _$_. Sempre que necessário as linhas de comando serão marcadas por números e a respectiva descrição daquela instrução como exibido a seguir: 
+Sempre que for necessário a execução de um comando no terminal esses comando serão apresentados em destaque e precedidos por _$_. Sempre que necessário, as linhas de comando serão marcadas por números e a respectiva descrição daquela instrução como exibido a seguir: 
 
 [source, bash]
 ----

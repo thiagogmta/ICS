@@ -51,8 +51,8 @@ IFTO Campus Palmas
 
 // include::capitulos/shared-prefacio.adoc[]
 
-include::capitulos/cap0-prefacio.adoc[]
-include::capitulos/cap1-netkit.adoc[]
+include::livro/capitulos/cap0-prefacio.adoc[]
+include::livro/capitulos/cap1-netkit.adoc[]
 
 //include::capitulos/cap2-dhcp.adoc[]
 
