@@ -100,7 +100,7 @@ $ ./check_configuration.sh
 Ao verificar a configuração realizada no seu terminal deverá apresentar as seguintes informações
 [#img-check] 
 .Parabéns! Sua instalação do Netkit está completa!
-image::livro/imagens/{cap}/01.png[check,400]
+image::imagens/{cap}/01.png[check,400]
 
 Caso apresente algum erro, poderá ser necessário a instalação de algumas dependênca.
 
