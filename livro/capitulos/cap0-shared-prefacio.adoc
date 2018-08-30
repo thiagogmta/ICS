@@ -1,0 +1,148 @@
+[[prefacio]]
+[preface]
+== Prefácio
+
+:cap: prefacio
+:online: {gitrepo}/blob/{edition}/livro/capitulos/code/{cap}
+:local: code/{cap}
+
+//
+// .Baixando a versão mais nova deste livro
+// ____
+// Acesse {gitrepo}/releases para verificar se há uma versão mais
+// nova deste livro (versão atual: *{edition}*). Você pode consultar
+// o Histórico de revisões, na início do livro, para verificar o que mudou
+// entre uma versão e outra.
+// ____
+//
+
+include::prefacio.adoc[]
+
+=== Caixas de diálogo
+
+No decorrer deste livro você poderá encontrar caixas de diálogo precedidas de ícones específicos. Confira o significado de cada uma delas:
+
+// NOTE: Chama atenção para informação auxiliar.
+// TIP: Dica...
+// IMPORATNT: Não esqueça...
+// WARNING: Atente para...
+// CAUTION: Assegure-se de que...
+
+[NOTE]
+========
+Essa marcação representa algum complemento de informação. Chama atenção para alguma informação auxiliar.
+========
+
+[TIP]
+========
+Essa marcação apresenta alguma dica!
+========
+
+[IMPORTANT]
+========
+Essa marcação é utilizada para chamar atenção a uma informação importante para que não se esqueça.
+========
+
+[CAUTION]
+========
+Essa marcação é um aviso para que tenha cautela ou se atente para algo.
+========
+
+[WARNING]
+========
+Essa marcação lhe chama atenção para que tenha cuidado, provavelmente para que se asseguro de algo.
+========
+
+////
+=== Vídeos
+
+Os vídeos são apresentados da seguinte forma:
+
+.Como baixar os códigos fontes: http://youtu.be/Od90rVXJV78
+["qrcode", size=10, scaledwidth="30%"]
+----
+http://youtu.be/Od90rVXJV78
+----
+
+Na versão web (em html) você poderá assistir os vídeos incorporados diretamente no livro. Na *versão impressa* irá aparecer uma imagem quadriculada (qrcode) contendo o link
+do vídeo.  Caso você tenha um celular com acesso a internet poderá acionar um programa de leitura de qrcode para acessar o vídeo.
+
+Na *versão digital* você poderá assistir o vídeo clicando diretamente sobre o link.
+
+
+=== Compreendendo as referências
+
+As referências são apresentadas conforme o elemento que está sendo referenciado:
+
+Referências a capítulos:: <<prefacio>>
+
+Referências a seções:: <<como_estudar>>, <<caixas_de_dialogo>>.
+
+Referências a imagens:: <<fig_issue_contribuicao>>
+
+NOTE: Na *versão impressa*, o número que aparece entre chaves ``[ ]'' 
+corresponde ao número da página onde está o conteúdo referenciado. Na 
+*versão digital* do livro você poderá clicar no link da referência.
+
+
+
+=== Códigos e comandos
+
+Os códigos ou comandos são apresentados com a seguinte formação:
+
+ echo "Hello Word"
+
+No exemplo a seguir, temos outra apresentação de código fonte. Desta
+vez de um arquivo _{prefacio-code}_, que se encontra dentro do diretório
+_livro/capitulos/code/{cap}_.  O diretório _{cap}_ indica o capítulo
+onde o código está relacionado.
+
+:srcfile: {prefacio-code}
+
+.Código fonte
+{online}/{srcfile}[{local}/{srcfile}]
+
+.{srcfile}
+----
+include::{local}/{srcfile}[]
+----
+
+[[sec_codigo_fonte]]
+=== Baixando os códigos fontes
+
+Recomendamos duas formas de acessar os códigos fontes contidos neste livro:
+
+Acesso on-line individual::
+{gitrepo}/tree/{edition}/livro/capitulos/code
+
+Baixando zip contendo os códigos::
+
+Versão atual::: {gitrepo}/archive/{edition}.zip
+
+NOTE: Independente do método utilizado para acessar os arquivos, os códigos
+fontes estão organizados por capítulos no diretório `livro/capitulos/code`.
+
+endif::prefacio-code[]
+
+
+[[sec_feedback]]
+
+
+=== Feedback
+
+Você pode contribuir com a atualização e correção deste livro. Ao
+final de cada capítulo você será convidado a fazê-lo, enviando
+um feedback como a seguir:
+
+include::feedback.adoc[]
+
+NOTE: A seção sobre o feedback, no guia do curso, pode ser acessado
+em: https://github.com/edusantana/guia-geral-ead-computacao-ufpb/blob/master/livro/capitulos/livros-contribuicao.adoc.
+
+[[fig_issue_contribuicao]]
+.Exemplo de contribuição
+image::images/prefacio/issue.eps[scaledwidth="70%"]
+
+
+Sempre terminar o arquivo com uma nova linha.
+////
