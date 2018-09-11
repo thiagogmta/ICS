@@ -5,8 +5,8 @@ Este livro foi escrito com o objetivo de servir de base para o estudo e prática
 
 Você vai encontrar nesse material um guia prático que irá lhe nortear em relação a configuração de alguns serviços em servidores linux utilizando como base o ambiente de testes Netkit. A pesar do processo ser realizado em um ambiente de testes o processo de instalação e configuração dos serviços utilizando o Netkit como meio ocorre tal como seria em um computador real. Justifica-se a utilização da ferramenta:
 
-* Possibilidade de configuração de serviços em um ambiente de testes controlado
-* Baixo investimento em infraestrutura (nesse contexto apenas um computador real é necessário para simular uma rede complexa com computadores, roteadores e servidores)
+* Possibilidade de configuração de serviços em um ambiente de testes controlado.
+* Baixo investimento em infraestrutura (nesse contexto apenas um computador real é necessário para simular uma rede complexa com computadores, roteadores e servidores).
 * Diversidade de possibilidades de testes.
 
 === Como este livro está organizado
@@ -79,7 +79,7 @@ $ cd pasta <2>
 
 * Procure compreender a definição abordada na *Apresentação* de cada capítulo. Inevitavelmente é frustrante realizar amguma tarefa sem compreender qual seu objetivo.
 * Leia atentamente todo o conteúdo apresentado na *Exemplificação* e só após tente, passo a passo, realizar as configurações. Algumas implementações exigem a compreenção todal da aplicação antes de sua implantação para sua execução eficaz.
-* Procure solucionar as as *Problematizações* propostas pois irão exercitar sua capacidade de solução de problemas e fixar os conhecimentos adquiridos.
+* Procure solucionar as *Problematizações* propostas pois irão exercitar sua capacidade de solução de problemas e fixar os conhecimentos adquiridos.
 * Por fim, busque documentar seu progresso e compartilhar seu conhecimento. Salve cuidadosamente cada laboratório que fizer pois servirá de material para estudo. Procure compartilhar o que aprendeu. Ao ensinar você irá aprender mais ainda.
 
 === Sobre o Autor
