@@ -53,7 +53,6 @@ IFTO Campus Palmas
 
 include::capitulos/cap0-prefacio.adoc[]
 include::capitulos/cap1-netkit.adoc[]
-
-//include::capitulos/cap2-dhcp.adoc[]
+include::capitulos/cap2-dhcp.adoc[]
 
 //Sempre termine os arquivos com uma linha em branco.

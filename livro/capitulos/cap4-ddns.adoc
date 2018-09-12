@@ -1,0 +1,283 @@
+:toc2:
+:numbered:
+:source-highlighter: highlightjs
+
+ 
+= Configurando servidor Dynamic DNS
+Prof. Thiago Guimarães Tavares - thiagogmta@gmail.com
+
+== Apresentação
+=== Objetivos:
+* Apresentação do DDNS
+* Configuração do serviços DDNS em ambiente Linux
+* Realização de atividade prática
+* Problematização
+
+
+=== DDNS
+*O que é?* +
+DDNS é abreviação para Synamic DNS, ou Sistema de Nomes de Domínios Dinâmico. É um método utilizado para atualizar automaticamente um servidor de nomes de domínio.
+
+*Para que serve?* +
+O DDNS é um complemento ao DNS e tem como objetivo relacionar um nome de domínio a um determinado usuário/host e manter esse relacionamento mesmo que o endereço IP desse usuário/host seja alterado. Podemos apresentar o exemplo de uma conexão de internet comum em uma residência. O modem do usuário irá receber um endereço de IP fixo do provedor para que possa acessar a internet. Entretanto, eventualmente o endereço do modem do usuário pode mudar, em decorrência de um eventual desligamento do aparelho ou de configurações preestabelecidas pelo provedor. Essa forma de funcionamento impede o usuário de realizar um relacionamento de nome com seu IP pois este irá ser alterado de tempos em tempos. Através do DDNS é possível por exemplo relacionar o domínio 
+thiagogmta.net a um determinado host, mesmo que o endereço IP desse host mude. Podemos citar o No-IP um dos mais famosos provedores de serviços DDNS que disponibiliza seu serviço de forma gratuita até três hosts.
+ 
+*Como funciona?* +
+Ao receber uma solicitação de atribuição de endereço IP o servidor DHCP, após atender a requisição envia uma notificação ao servidor DNS sobre o novo host e seu endereço. O servidor DNS, por sua vez, de posse daquelas informações, atualiza sua base de dados de endereços.
+
+== Exemplificação
+
+=== Ambiente
+
+NOTE: Leve em consideração que nosso ambiente tem a seguinte topologia implementada através do netkit:
+
+.Topologia de testes
+image:netkit1.jpg[Topologia]
+
+NOTE: Para implementação do DDNS será necessário a configuração de um servidor DHCP e o relacionamento deste servidor com o servidor DNS. Dessa forma, iremos levar em consideração que o PC1 será o servidor DHCP e o PC2 será o servidor DNS.
+
+=== Configuração do servidor DHCP
+
+O servidor DHCP deve possuir um IP fixo. Dessa forma este host será configurado com o endereço IP *10.1.1.1*.
+
+==== Configurações Iniciais
+
+As configurações referentes ao dhcp serão feitas no arquivo /etc/dhcpd3/dhcpd.conf 
+
+NOTE: É possível inserir as configurações desejadas diretamente no arquivo original ou fazer um backup do arquivo e criar um novo apenas com as configurações desejadas. Fica ao seu critério. Para o desenvolvimento deste material foi criado um novo arquivo.
+
+[source,bash]
+----
+$ mv /etc/dhcpd3/dhcpd.conf /etc/dhcpd3/dhcpd.conf.old
+$ touch /etc/dhcpd3/dhcpd.conf
+$ nano /etc/dhcpd3/dhcpd.conf
+----
+No novo arquivo de configuração foram inseridas as seguintes linhas:
+
+[source,bash]
+----
+ddns-update-style none; <1>
+default-lease-time 600; <2>
+max-lease-time 7200; <3>
+authoritative; <4> 
+
+subnet 10.1.1.0 netmask 255.255.255.0{ <5>
+	range 10.1.1.10 10.1.1.20; <6>
+	option subnet-mask 255.255.255.0; <7>
+	option routers 10.1.1.1; <8>	
+	option broadcast-address 10.1.1.255; <9>
+	option domain-name-servers 10.1.1.2; <10>
+	option domain-name “thiagogmta.net”; <11>
+	
+}
+----
+
+<1> Desabilita atualização dinâmica
+<2> Informa que o servidor dhcp irá verificar a cada 600 segundos se as estaçãoes estão ativas.
+<3> Determina o tempo máximo que um host pode ficar com um endereço.
+<4> Define como servidor DHCP principal da rede
+<5> Informa o endereço da rede e sua máscara. Dentro do seu bloco são inseridas as configurações para distribuição de endereços.
+<6> Faixa de distribuição de endereços
+<7> Máscara da rede
+<8> Endereço de Gateway padrão
+<9> Endereço de broadcast da rede
+<10> Servidor DNS (caso exista)
+<11> Nome do domínio
+
+Ao finalizar inicie (ou reinicie) o servidor para validar as configurações.
+
+[source,bash]
+----
+$ /etc/init.d/dhcpd3 start
+----
+
+==== Definindo um IP fixo para o servidor DNS no DHCP
+Como necessitamos que o servidor DNS tenha um IP fixo para que os clientes possam lhe enviar solicitações, faremos essa configuração inserindo o seguinte bloco de informações ao final do arquivo dhcpd.conf
+
+[source,bash]
+----
+host pc2 { <1>
+	hardware ethernet fe80::2c18:ccff:fed4:8ce7; <2>
+	fixed-address 10.1.1.2; <3>
+}
+----
+<1> Bloco de configuração para endereçamento fixo para o host pc2
+<2> Endereço físico do host
+<3> Endereço Ip que será atrelado ao host do endereço físico informado
+
+==== Testando
+
+Feitas as configurações, acessaremos o host *pc2* referente ao servidor DNS e solicitaremos atualização de endereço.
+
+[source,bash]
+----
+$ dhclient eth0
+----
+
+Configurações iniciais do servidor DHCP finalizadas.
+
+=== Configuração do servidor DNS
+
+Feita a configuração do servidor DHCP partiremos para a configuração do servidor DNS.
+
+==== Criação das Zonas
+
+O primeiro passo para configuração do DNS é acessar o arquivo named.conf.local e criar as zonas de configuração.
+
+[source,bash]
+----
+$ nano /etc/bind/named.conf.local
+----
+
+[source,bash]
+----
+//Zona de pesquisa direta
+zone "thiago.net"{ <1>
+	type master; <2>
+	file "/etc/bind/db.thiago.net"; <3>
+}
+
+//Zona de pesquisa reversa
+zone "1.1.10.in-addrnarpa"{ <4>
+	type master;
+	file "/etc/bind/db.10"; <5>
+}
+----
+<1> Nome da zona onde thiago.net é o domínio
+<2> Tipo de zona
+<3> Caminho do arquivo da zona direta (deverá ser criado)
+<4> Zona reversa que é representada pelo Ip do servidor ao contrário sem o ultimo octeto seguido da terminação .in-addr.arpa (padrão)
+<5> Caminho do arquivo de zona reversa
+
+==== Configurando os Encaminhadores
+
+A medida que nosso servidor DNS receber requisições de resolução de nomes quais ele não saiba a resposta deverá encaminha-las a um próximo servidor DNS. Descomentar o bloco representado lobo a baixo e inserir um endereço Ip de outro servidor DNS.
+
+[source,bash]
+----
+$ nano /etc/bind/named.conf.options
+----
+
+[source,bash]
+----
+fowarders{
+	8.8.8.8
+}
+----
+
+==== Criação de arquivos para as Zonas: Direta e reversa
+
+Para facilitar o trabalho faremos uma cópia de dois arquivos já existentes que servirão de base:
+
+[source,bash]
+----
+$ cp /etc/bind/db.local /etc/bind/db.thiago.net
+$ cp /etc/bind/db.127 /etc/bind/db.10
+----
+*Zona Direta*
+
+[source,bash]
+----
+$ nano /etc/bind/db.thiago.net
+----
+
+[source,bash]
+----
+; BIND - Zona Direta (nome.com.br)
+;---
+$TTL    604800
+@       IN      SOA     pc2.thiago.net. root.thiago.net. (
+                		2014051801       ; Serial
+                            604800       ; Refresh
+                             86400       ; Retry
+                           2419200       ; Expire
+                            604800 )     ; Negative Cache TTL
+;
+@       IN     NS       pc1.thiago.net.
+@       IN     NS       pc2.thiago.net.
+pc1     IN     A        10.1.1.1
+pc2     IN     A        10.1.1.2
+----
+
+*Zona Reversa*
+
+[source,bash]
+----
+$ nano /etc/bind/db.10
+----
+
+[source,bash]
+----
+; BIND - Zona Reversa (nome.com.br)
+;---
+$TTL    604800
+@       IN      SOA     pc2.thiago.net. root.thiago.net. (
+                        2014051801       ; Serial
+                            604800       ; Refresh
+                             86400       ; Retry
+                           2419200       ; Expire
+                            604800 )     ; Negative Cache TTL
+;
+@       IN      NS      pc1.thiago.net.
+@       IN      NS      pc2.thiago.net.
+1       IN      PTR     pc1.thiago.net.
+2       IN      PTR     pc2.thiago.net.
+----
+
+Após as configurações podemos checar as configurações de zonas e verificar eventuais erros através dos comandos:
+
+[source,bash]
+----
+$ named-checkzone thiago.info /etc/bind/db.thiago.info
+$ named-checkzone thiago.info /etc/bind/db.10
+----
+
+Caso retorne OK a configuração está correta basta iniciar o servidor.
+
+[source,bash]
+----
+$ /etc/init.d/bind start
+----
+
+==== Testando o servidor DNS
+
+Para verificar se as zonas foram preenchidas corretamente podemos verificar sua tabela através do comando:
+
+[source,bash]
+----
+$ host -l thiago.net
+----
+
+Para testar se os hosts cadastrados estão respondendo por seus respectivos nomes podemos utilizar os comandos ping ou host a partir do pc2 para o pc1.
+
+[source,bash]
+----
+$ host pc1
+$ ping pc1
+----
+
+O comando host irá retornar o endereço Ip do pc1 e o comando ping irá enviar um pacote para o ip correspondente ao pc1.
+
+== Configurando o Dynamic Domain Name System
+
+O ponto interessante do DDNS é que a medida que o servidor DHCP recebe requisições dos clientes ele envia essas informações ao servidor DNS que por sua vez atualiza suas tabelas de resolução de nomes.
+As configurações apresentadas até este ponto são configurações básicas para o funcionamento de ambos os serviços DHCP e DNS. Faremos então algumas alterações para habilitar o DDNS.
+
+=== Alterações no servidor DHCP
+
+[source,bash]
+----
+* include "/etc/bind/rndc.key"; *
+
+zone "thiago.net"{
+        type master;
+        file "/etc/bind/db.thiago";
+        allow-update {key "rndc-key";};
+};
+
+zone "1.1.10.in-addr.arpa"{
+        type master;
+        file "/etc/bind/db.10";
+        allow-update {key "rndc-key";};
+};
+----

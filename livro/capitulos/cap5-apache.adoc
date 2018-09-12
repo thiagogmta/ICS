@@ -1,0 +1,98 @@
+== Servidor Web - Apache
+Prof. Thiago Guimarães Tavares - thiagogmta@gmail.com
+IFTO Campus Palmas
+
+:cap: cap4-apache
+
+.Objetivos do capítulo
+____________________
+Ao final deste capítulo você deverá ser capaz de:
+
+* Entender o que é e para que serve um servidor Web Apache.
+* Ser capaz de realizar as configurações iniciais para o funcionamento do servidor como: Iniciar, parar e reiniciar o serviço; Realizar alteração de diretórios e portas de funcionamento do servidor.
+* Realizar a configuração de hosts virtuais.
+____________________
+
+=== Apresentação
+
+==== O que é?
+Um servidor web é responsável pela gestão e armazenamento de diversos sites e serviços disponíveis na internet. Desde pequenos sites a grandes canais de entretenimento, redes sociais e mecanismos de busca, são hospedados em servidores web (MORIMOTO, 2013).
+
+==== Para que serve?
+Um servidor web conta com uma gama de módulos que vão fornecer as funcionalidades necessárias para o funcionamento dos serviços ali hospedados. A exemplo temos uma aplicação comumente conhecida como LAMP que combina alguns dos módulos essenciais para hospedagem de sites. O
+LAMP é acrônimo para Linux + Apache + MySQL + PHP. (MORIMOTO, 2013).
+
+
+==== Como funciona?
+Quando o usuário digita o endereço de um determinado site o servidor DNS converte esse nome em um endereço IP. Esse endereço é correspondente ao endereço do servidor que hospeda o site. Ao chegar no servidor a requisição é tratada de forma a retornar para o browser do usuário a página desejada. (MORIMOTO, 2013).
+Nesta sessão sobre servidores web nos atentaremos a respeito da configuração do Apache.
+ 
+
+=== Apache: Exemplificação
+
+==== Criação do Ambiente
+
+Leve em consideração que nosso ambiente tem a seguinte topologia implementada através do
+netkit:
+
+[#img-diagrama01] 
+.Laboratório 01
+image::imagens/{cap}/diagrama01.png[diagrama01]
+
+==== Apache
+
+O Apache é um serviço que oferce suporte a hospedagem de um ou vários sites no servidor, interpretando páginas estáticas e scripts. Para que seja possível a hospedagem de páginas dinâmicas com inegração com PHP e MySQL por exemplo, faz-se necessário a implementação do LAMP.
+O apache pode ser dividido em dois grupos de versões mais utilizadas sendo a versão 1.3 e a versão 2 qual será utilizada neste guia. O motivo da versão 1.3 ainda ser utilizada é sua compartibilidade com módulos antigos não disponíveis para versão 2.
+
+==== Apache - Instalação, Arquivos de configuração e comandos
+
+*Instalação*
+O Apache2 pode ser instalado através do seguinte comando:
+
+[source, bash]
+----
+$ sudo apt-get install apache2
+----
+
+No netkit o apache já vem instalado por padrão. Ao instalar o apache2, também é instalado o suporte ao SSL automaticamente.
+
+Iniciar, parar e reiniciar o servidor:
+
+[source, bash]
+----
+$ /etec/init.d/apache2 start
+$ /etec/init.d/apache2 stop
+$ /etec/init.d/apache2 restart
+----
+
+*Arquivos de configuração*
+Todos os arquivos de configuração do servidor Web Apache estão disponíveis em /etc/apache2. Segue sua descrição:
+
+* apache2.conf      - Arquivo de configuração principal do apach
+* mods-available    - Módulos disponíveis no servidor
+* mods-enabled      - Módulos ativos no servidor
+* ports.conf        - Arquivo de configuração para alteração de portas no servidor
+* sites-available   - Diretório que armazena os hosts virtuais no servidor
+* sites-enabled     - Diretório que armazena os hosts virtuais ativos no servidor
+
+*Comandos*
+
+Existem alguns comandos que podem ser utilizados para habilitar ou desabilitar um módulo ou um host virtual:
+
+* a2ensite      - Habilita um host virtual
+* a2dissite     - Desabilita um host virtual
+* a2enmod       - Habilita um módulo específico
+* a2dismod      - Desabilita um módulo específico
+
+Ao trabalharmos com hosts virtuais esses comandos serão melhor detalhados.
+
+=== Problematização
+
+Revisão do que foi aprendido.
+
+Reserve o último parágrafo para realizar uma *ponte* para o próximo capítulo.
+
+
+// Sempre terminar o arquivo com uma nova linha.
+
+image::imagens/{cap}/01.png[check,400]

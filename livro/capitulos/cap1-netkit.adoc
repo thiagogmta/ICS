@@ -232,7 +232,7 @@ A imagem a seguir ilustra o funcionamento do teste onde o pc1 envia pacotes ao p
 
 [#img-ping] 
 .Teste rede ponto-a-ponto
-image::02.png[ping,600]
+image::imagens/{cap}/02.png[ping,600]
 
 ==== Criando um Laboratório
 
@@ -246,7 +246,7 @@ Para nosso exemplo utilizaremos como cenário 3 hosts e dois hubs. O pc1 e 3 ter
 
 [#img-diagrama01] 
 .Laboratório 01
-image::diagrama01.png[diagrama01,300]
+image::imagens/{cap}/diagrama01.png[diagrama01,300]
 
 *1 - Criando arquivos e diretórios*
 

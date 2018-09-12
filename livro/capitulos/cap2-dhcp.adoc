@@ -2,13 +2,15 @@
 Prof. Thiago Guimarães Tavares - thiagogmta@gmail.com
 IFTO Campus Palmas
 
+:cap: cap2-dhcp
+
 .Objetivos do capítulo
 ____________________
 Ao final deste capítulo você deverá ser capaz de:
 
-* Entender o que é e para que serve um servidor DHCP
-* Ser capaz de realizar a configuração de um servidor DHCP simples
-* Realizar o vinculo de Endereços MACs a determinados endereços IP's através do servidor DHCp
+* Entender o que é e para que serve um servidor DHCP.
+* Ser capaz de realizar a configuração de um servidor DHCP simples.
+* Realizar o vinculo de Endereços MACs a determinados endereços IP's através do servidor DHCP.
 ____________________
 
 === Apresentação: DHCP
@@ -37,7 +39,7 @@ netkit:
 
 [#img-diagrama01] 
 .Laboratório 01
-image::diagrama01.png[diagrama01]
+image::imagens/{cap}/diagrama01.png[diagrama01]
 
 ===== Etapa 1: Criando Arquivos e Diretórios
 
@@ -79,13 +81,13 @@ $ lstart
 
 [#lstart] 
 .Iniciando o Laboratório
-image::01.png[lstart]
+image::imagens/{cap}/01.png[lstart]
 
 Os quatro hosts virtuais serão inicializados.
 
 [#lab-dhcp] 
 .Laboratório DHCP Iniciado
-image::02.png[lab-dhcp]
+image::imagens/{cap}/02.png[lab-dhcp]
 
 ==== Configuração do Servidor DHCP
 
@@ -196,7 +198,7 @@ Caso ocorra algum erro de configuração será apresentado o erro e sua linha no
 
 [#erro-dhcp] 
 .Laboratório DHCP Iniciado
-image::03.png[erro-dhcp]
+image::imagens/{cap}/03.png[erro-dhcp]
 
 Para esses casos deve-se verificar o arquivo syslog.
 
@@ -209,7 +211,7 @@ Entretanto, em teoria, seu laboratório deve funcionar perfeitamente apresentand
 
 [#ok-dhcp] 
 .ISC DHCP OK
-image::04.png[ok-dhcp]
+image::imagens/{cap}/04.png[ok-dhcp]
 
 ===== Etapa 4: Hosts Clientes
 
@@ -222,7 +224,7 @@ dhclient eth0
 
 [#clientes-dhcp] 
 .Distribuição de Endereços
-image::05.png[clientes-dhcp]
+image::imagens/{cap}/05.png[clientes-dhcp]
 
 Seu laboratório está com o servidor DHCP está pronto. Para validar as configurações realize testes de ping entre os hosts. Caso seja necessário a remoção de endereço em algum dos hosts para realizar novos testes utilize o comando:
 
