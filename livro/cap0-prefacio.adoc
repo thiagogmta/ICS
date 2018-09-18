@@ -1,5 +1,5 @@
 [preface]
-= Saudações
+== Saudações
 
 Este livro foi escrito com o objetivo de servir de base para o estudo e prática de configuração de servidores Linux. Observando o impasse da necessidade de infraestrutura física para o estudo da disciplina de Redes e suas derivações, como a configuração de Servidores, algumas ferramentas foram projetadas de forma a simular o ambiente físico. Uma dessas ferramentas é o *Netkit*. Essa ferramenta permite criarmos redes virtuais de computadores com a virtualização de hosts que consomem pouquissímos recursos do computador hospedeiro. Dessa forma podemos não só simular diversas topologias de redes como tambem realizar a configuração de serviços e servidores linux.
 

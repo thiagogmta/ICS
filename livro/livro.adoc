@@ -1,13 +1,9 @@
-= Instalação e Configuração de Serviços
-Prof. Thiago Guimarães Tavares - thiagogmta@gmail.com
-IFTO Campus Palmas
-
-:chapter-label:
-
 //Instrução para exibição dos ícones
 ++++
 <link rel="stylesheet"  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css">
 ++++
+
+:chapter-label:
 
 //autor do documento
 :author: Thiago Guimarães Tavares
@@ -51,8 +47,15 @@ IFTO Campus Palmas
 
 // include::capitulos/shared-prefacio.adoc[]
 
-include::capitulos/cap0-prefacio.adoc[]
-include::capitulos/cap1-netkit.adoc[]
-include::capitulos/cap2-dhcp.adoc[]
+= Instalação e Configuração de Serviços
+Prof. Thiago Guimarães Tavares - thiagogmta@gmail.com
+IFTO Campus Palmas
+
+//include::cap0-prefacio.adoc[]
+//include::cap1-netkit.adoc[]
+//include::cap2-dhcp.adoc[]
+//include::cap3-dns.adoc[]
+//include::cap4-ddns.adoc[]
+include::cap5-apache.adoc[]
 
 //Sempre termine os arquivos com uma linha em branco.

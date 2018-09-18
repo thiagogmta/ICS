@@ -1,14 +1,13 @@
-
 == Netkit - Sistema para Emulação de Redes de Computadores
 
 :cap: cap1-netkit
 
-Prof. Thiago Guimarães Tavares - thiagogmta@gmail.com
-IFTO Campus Palmas
+Prof. Thiago Guimarães Tavares - thiagogmta@gmail.com - IFTO Campus Palmas
 
 .Objetivos do capítulo
 
 ____________________
+
 Ao final deste capítulo você deverá ser capaz de:
 
 * Entender o que é e para que serve o Netkit
@@ -26,7 +25,6 @@ Netkit é um sistema para emulação de  redes de computadores que possibilita a
 * 32mb de consumo de memória ram. Esse valor pode ser alterado, mas é setado por padrão.
 * Um sistema de arquivos armazenado em um único arquivo no disco com extensão .disk
 * Uma ou várias interfaces de rede. Cada interface de rede pode ser conectada a um _domínio de dolisão_ (hub/switch).
-
 
 ==== Para que serve?
 
@@ -338,5 +336,3 @@ Para configurar um acesso a rede externa dentro de um laboratório. Basta fazer 
 #lab.conf
 pc1[0]=tap,192.168.10.1,192.168.10.2
 ----
-
-=== Problematização
